@@ -38,8 +38,7 @@ const action = {
 const defaultAction = _.keys(action)[0]
 
 @cerebral({
-	currentObject: ['currentObject'],
-	test: ['test']
+	currentObject: ['currentObject']
 })
 
 class ObjectMenu extends React.Component {
