@@ -3,6 +3,7 @@ import React from 'react'
 
 import Toolbar from 'material-ui/lib/toolbar/toolbar'
 import ToolbarSeparator from 'material-ui/lib/toolbar/toolbar-separator'
+import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group'
 
 import FlatButton from 'material-ui/lib/flat-button'
 
@@ -10,6 +11,7 @@ import LeftNav from 'material-ui/lib/left-nav'
 import MenuItem from 'material-ui/lib/menu/menu-item'
 
 import ObjectMenu from '../ObjectMenu'
+import ObjectControls from '../ObjectControls'
 
 class HeaderToolbar extends React.Component {
 
@@ -27,6 +29,7 @@ class HeaderToolbar extends React.Component {
 		return (
 			<Toolbar>
 				<ObjectMenu />
+				<ObjectControls />
 			</Toolbar>
 		)
 	}
