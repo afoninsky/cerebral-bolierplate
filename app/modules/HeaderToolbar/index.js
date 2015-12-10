@@ -24,12 +24,11 @@ class HeaderToolbar extends React.Component {
 			throw new Error('incorrect menu item: ' + menuItem)
 		}
 	}
-
+// <ObjectControls />
 	render() {
 		return (
 			<Toolbar>
 				<ObjectMenu />
-				<ObjectControls />
 			</Toolbar>
 		)
 	}

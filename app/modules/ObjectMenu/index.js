@@ -38,15 +38,14 @@ const action = {
 const defaultAction = _.keys(action)[0]
 
 @cerebral({
-	objectActiveAction: ['objectActiveAction']
+	currentObject: ['currentObject'],
+	test: ['test']
 })
 
 class ObjectMenu extends React.Component {
 
 	static propTypes = {
-		objectActiveAction: React.PropTypes.oneOf(
-			_.keys(action).concat('')
-		)
+		currentObject: React.PropTypes.object
 	}
 
 	onMenuItemClick(item) {
@@ -58,7 +57,7 @@ class ObjectMenu extends React.Component {
 	getCurrentMenuItems() {
 
 		const menuOptions = []
-		const activeAction = this.props.objectActiveAction
+		const selectedActionName = this.props.currentObject.selectedAction
 		const onMenuItemClick = this.onMenuItemClick.bind(this)
 		_.each(action, function (v, k) {
 			menuOptions.push(
@@ -66,7 +65,7 @@ class ObjectMenu extends React.Component {
 					onItemTouchTap={() => onMenuItemClick(k)}
 					onClick={() => onMenuItemClick(k)}
 					primaryText={v.title}
-					disabled={k === activeAction}
+					disabled={k === selectedActionName}
 					leftIcon={v.icon}/>
 			);
 		}.bind(this))
@@ -74,7 +73,8 @@ class ObjectMenu extends React.Component {
 	}
 
 	getCurrentButton() {
-		const activeAction = action[this.props.objectActiveAction]
+		const selectedActionName = this.props.currentObject.selectedAction
+		const activeAction = action[selectedActionName]
 		if(!activeAction) {
 			return <IconButton disabled={true} tooltip={action[defaultAction].tooltip}>{action[defaultAction].icon}</IconButton>
 		}

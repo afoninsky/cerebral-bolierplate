@@ -3,7 +3,9 @@ import Model from 'cerebral-baobab';
 
 // states model
 const model = Model({
-	objectActiveAction: 'settings'
+	currentObject: {
+		selectedAction: 'settings'
+	}
 });
 
 // services available to signals

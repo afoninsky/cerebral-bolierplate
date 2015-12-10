@@ -12,7 +12,8 @@ const menuItems = [
 ]
 
 @cerebral({
-	objectActiveAction: ['objectActiveAction']
+	objectActiveAction: ['objectActiveAction'],
+	test: ['test']
 })
 
 /*
