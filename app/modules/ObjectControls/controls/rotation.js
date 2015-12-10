@@ -9,7 +9,7 @@ class ObjectMenu extends React.Component {
 
 	render() {
 		return (
-				<span>|{this.props.currentObject.selectedAction}|</span>
+				<span>r|{this.props.currentObject.selectedAction}|</span>
 		)
 	}
 }

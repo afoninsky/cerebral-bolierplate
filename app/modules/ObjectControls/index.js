@@ -10,7 +10,15 @@ import Toggle from 'material-ui/lib/toggle'
 
 import ControlSettings from './controls/settings'
 
-// settings, coordinates, rotation, opacity, background
+
+// 2do: export items from ObjectMenu ?
+const controls = {
+	settings:  React.createElement(require('./controls/settings')),
+	coordinates:  React.createElement(require('./controls/coordinates')),
+	rotation:  React.createElement(require('./controls/rotation')),
+	opacity:  React.createElement(require('./controls/opacity')),
+	background:  React.createElement(require('./controls/background'))
+}
 
 @cerebral({
 	currentObject: ['currentObject']
@@ -18,18 +26,10 @@ import ControlSettings from './controls/settings'
 
 class ObjectControls extends React.Component {
 
-	getActionControls() {
-		// return objectControl[this.props.currentObject.selectedAction]
-		const selectedAction = this.props.currentObject.selectedAction
-		// var qwe = require('./controls/settings')
-		// console.log(qwe)
-		return React.createElement(ControlSettings)
-	}
-
 	render() {
 		return (
 				<span>
-					{this.getActionControls()}
+					{controls[this.props.currentObject.selectedAction]}
 				</span>
 		)
 	}
