@@ -6,16 +6,36 @@ import SelectField from 'material-ui/lib/select-field'
 import Slider from 'material-ui/lib/slider'
 import Toggle from 'material-ui/lib/toggle'
 
-// import objectControl from './controls'
+const menuItems = [
+	{ payload: '1', text: 'Квадрат' },
+	{ payload: '2', text: 'Круг' }
+]
 
 @cerebral({
 	objectActiveAction: ['objectActiveAction']
 })
 
+/*
+					<SelectField menuItems={menuItems}/>
+
+					<Slider
+						name="slider2"
+						onDragStop=""
+						defaultValue={0.5}
+						max={10}
+						min={0}
+						step={0.10}
+						disabled={true} />
+
+					<Toggle
+						defaultToggled={true}
+  					value="toggleValue1"
+						onToggle="" />
+ */
 class ObjectControls extends React.Component {
 
 	getActionControls() {
-		console.log(this.props.objectActiveAction)
+		console.log()
 	}
 
 	render() {

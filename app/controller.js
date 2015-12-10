@@ -3,8 +3,7 @@ import Model from 'cerebral-baobab';
 
 // states model
 const model = Model({
-	active: 'setObjCommon'
-	// active: ''
+	objectActiveAction: 'settings'
 });
 
 // services available to signals
