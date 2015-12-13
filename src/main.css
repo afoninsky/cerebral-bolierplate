@@ -1,0 +1,69 @@
+html, body { height: 100%; padding: 0; margin: 0; font-family: arial; }
+
+h2 {
+  font-weight: normal;
+}
+
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:active, input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+
+.droppedImage1, .droppedImage2, .droppedImage3, .droppedImage0 {
+  width: 50%;
+  height: 50%;
+  float: left;
+}
+.droppedImage0, .droppedImage3{
+  background-color: #ccc;
+}
+
+#app {
+/*  background-color: green;
+  height: 50px;
+  border: 1px solid blue;*/
+}
+
+.leftNav-appBar>h1 {
+  text-align: center;
+}
+.leftNav-menuItem {
+  text-transform: uppercase;
+}
+.leftNav-button {
+  vertical-align: middle;
+  padding-left: 12px;
+  line-height: 36px;
+}
+.leftNav-logout {
+  padding-top: 45px;
+}
+.leftNav-userName {
+  text-align: center;
+  text-transform: uppercase;
+  padding-top: 40px;
+}
+.leftNav-userRole {
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
+.login-header {
+  margin: 100px 0 60px 0;
+}
+.login-buttonWrapper {
+  margin-top: 50px;
+}
+
+
+.u-center {
+  text-align: center;
+}
+.u-wide {
+  width: 100%;
+}
+
+
+.pageUsers-table-id {
+  min-width: 300px;
+}

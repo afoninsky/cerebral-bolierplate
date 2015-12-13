@@ -3,13 +3,12 @@ import ReactDOM from 'react-dom'
 import controller from './controller'
 import {Container} from 'cerebral-react'
 
-import Home from './modules/Home'
-// import _Home from './modules/_Home'
+import Home from './components/Home'
+import './main.css';
 
 window.THREE = require('three')
 
-require('./modules/ObjectMenu/signals')
-require('./modules/_Home/signals')
+require('./components/ObjectMenu/signals')
 
 require('react-tap-event-plugin')()
 
