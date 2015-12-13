@@ -1,10 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import controller from './controller';
-import {Container} from 'cerebral-react';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import controller from './controller'
+import {Container} from 'cerebral-react'
 
-import Home from './modules/Home';
-import _Home from './modules/_Home';
+import Home from './modules/Home'
+// import _Home from './modules/_Home'
+
+window.THREE = require('three')
 
 require('./modules/ObjectMenu/signals')
 require('./modules/_Home/signals')

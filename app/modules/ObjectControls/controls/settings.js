@@ -16,11 +16,14 @@ const menuItems = [
 class ObjectMenu extends React.Component {
 
 	render() {
+		// return (
+		// 	<span>
+		// 		<DropDownMenu menuItems={menuItems} />
+		// 		<Slider name="size" defaultValue={5} step={0.1} min={0} max={10} />
+		// 	</span>
+		// )
 		return (
-			<span>
-				<DropDownMenu menuItems={menuItems} />
-				<Slider name="size" defaultValue={5} step={0.1} min={0} max={10} />
-			</span>
+			<span>settings</span>
 		)
 	}
 }

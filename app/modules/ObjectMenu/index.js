@@ -74,6 +74,7 @@ class ObjectMenu extends React.Component {
 	}
 
 	getCurrentButton() {
+
 		const selectedActionName = this.props.currentObject.selectedAction
 		const activeAction = action[selectedActionName]
 		if(!activeAction) {
@@ -82,9 +83,6 @@ class ObjectMenu extends React.Component {
 		return <IconButton tooltip={activeAction.tooltip}>{activeAction.icon}</IconButton>
 	}
 
-// 2do: test
-// <DropDownIcon iconClassName="icon-navigation-expand-more" menuItems={iconMenuItems} />
-// http://www.material-ui.com/#/components/toolbars
 	render() {
 		return (
 				<IconMenu

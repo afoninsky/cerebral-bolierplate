@@ -1,11 +1,15 @@
 import React from 'react';
 import HeaderToolbar from '../HeaderToolbar';
+import Canvas from '../Canvas';
 
 class App extends React.Component {
 
   render() {
 		return (
-			<HeaderToolbar />
+      <div>
+			     <HeaderToolbar />
+           <Canvas />
+      </div>
     )
   }
 }
