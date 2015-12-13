@@ -4,7 +4,7 @@ import Model from 'cerebral-baobab';
 // states model
 const model = Model({
 	currentObject: {
-		selectedAction: 'settings'
+		selectedAction: 'background'
 	}
 });
 

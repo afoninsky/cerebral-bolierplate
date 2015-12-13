@@ -4,20 +4,17 @@ import React from 'react'
 import Toolbar from 'material-ui/lib/toolbar/toolbar'
 import ToolbarSeparator from 'material-ui/lib/toolbar/toolbar-separator'
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group'
-
-import FlatButton from 'material-ui/lib/flat-button'
-
-import LeftNav from 'material-ui/lib/left-nav'
-import MenuItem from 'material-ui/lib/menu/menu-item'
+import ToolbarTitle from 'material-ui/lib/toolbar/toolbar-title'
 
 import ObjectMenu from '../ObjectMenu'
 import ObjectControls from '../ObjectControls'
+import SphereSelectControl from '../SphereSelectControl'
 
 class HeaderToolbar extends React.Component {
 
 	onMenuItemClick(menuItem) {
 		switch (menuItem) {
-		case 'list-loaded-spheres':
+		case 'list-spheres':
 			this.refs.leftNav.toggle()
 			break;
 		default:
@@ -28,8 +25,11 @@ class HeaderToolbar extends React.Component {
 	render() {
 		return (
 			<Toolbar>
-				<ObjectMenu />
-				<ObjectControls />
+				<ToolbarGroup key={0}>
+					<SphereSelectControl />
+					<ObjectMenu />
+					<ObjectControls />
+				</ToolbarGroup>
 			</Toolbar>
 		)
 	}

@@ -6,6 +6,8 @@ import IconButton from 'material-ui/lib/icon-button'
 import MenuItem from 'material-ui/lib/menus/menu-item'
 import IconMenu from 'material-ui/lib/menus/icon-menu'
 
+// style="position: relative; display: inline-block; height: 48px; font-size: 15px; outline: none; width: 192px;"
+
 // compas = explore
 const action = {
 	settings: {
@@ -80,6 +82,9 @@ class ObjectMenu extends React.Component {
 		return <IconButton tooltip={activeAction.tooltip}>{activeAction.icon}</IconButton>
 	}
 
+// 2do: test
+// <DropDownIcon iconClassName="icon-navigation-expand-more" menuItems={iconMenuItems} />
+// http://www.material-ui.com/#/components/toolbars
 	render() {
 		return (
 				<IconMenu

@@ -27,11 +27,7 @@ const controls = {
 class ObjectControls extends React.Component {
 
 	render() {
-		return (
-				<span>
-					{controls[this.props.currentObject.selectedAction]}
-				</span>
-		)
+		return controls[this.props.currentObject.selectedAction]
 	}
 
 }
