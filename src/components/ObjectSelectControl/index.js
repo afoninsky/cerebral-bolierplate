@@ -6,10 +6,16 @@ import IconButton from 'material-ui/lib/icon-button'
 import MenuItem from 'material-ui/lib/menus/menu-item'
 import IconMenu from 'material-ui/lib/menus/icon-menu'
 
+import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group'
+import FlatButton from 'material-ui/lib/flat-button'
+import LeftNav from 'material-ui/lib/left-nav'
+
+import ObjectControls from '../ObjectControls'
+
 // style="position: relative; display: inline-block; height: 48px; font-size: 15px; outline: none; width: 192px;"
 
 // compas = explore
-const action = {
+const actions = {
 	settings: {
 		tooltip: 'Тип объекта, его размеры',
 		title: 'Тип фигуры',
@@ -37,62 +43,82 @@ const action = {
 	}
 }
 
-const defaultAction = _.keys(action)[0]
+const defaultAction = _.keys(actions)[0]
 
 @cerebral({
-	currentObject: ['currentObject']
+	spheres: ['spheres'],
+	selectedSphereId: ['selectedSphereId'],
+	selectedResource: ['selectedResource']
 })
 
-class ObjectMenu extends React.Component {
+class ObjectSelectControl extends React.Component {
 
 	static propTypes = {
 		currentObject: React.PropTypes.object
 	}
 
-	onMenuItemClick(item) {
-		this.props.signals.objectMenuSelected({
-			value: item
-		});
+	getComponentListItems() {
+
 	}
 
-	getCurrentMenuItems() {
+	onComponentListSelect() {
 
+	}
+
+	onMenuItemClick(item) {
+		// this.props.signals.objectSelected(item);
+		this.props.signals.actionSelected(item);
+	}
+
+	selectedResource() {
+		const selectedSphereId = this.props.selectedSphereId
+		return this.props.selectedResource[selectedSphereId] || {}
+	}
+
+	getComponentOptionsList() {
+
+		const {index, action} = this.selectedResource()
 		const menuOptions = []
-		const selectedActionName = this.props.currentObject.selectedAction
 		const onMenuItemClick = this.onMenuItemClick.bind(this)
-		_.each(action, function (v, k) {
+		_.each(actions, function (v, k) {
 			menuOptions.push(
 				<MenuItem key={k}
 					onItemTouchTap={() => onMenuItemClick(k)}
 					onClick={() => onMenuItemClick(k)}
 					primaryText={v.title}
-					disabled={k === selectedActionName}
+					disabled={k === action}
 					leftIcon={v.icon}/>
 			);
 		}.bind(this))
 		return menuOptions
 	}
 
-	getCurrentButton() {
+	getComponentOptionButton() {
 
-		const selectedActionName = this.props.currentObject.selectedAction
-		const activeAction = action[selectedActionName]
-		if(!activeAction) {
-			return <IconButton disabled={true} tooltip={action[defaultAction].tooltip}>{action[defaultAction].icon}</IconButton>
+		const {index, action} = this.selectedResource()
+		if(!action) {
+			return <IconButton disabled={true} tooltip={actions[defaultAction].tooltip}>{actions[defaultAction].icon}</IconButton>
 		}
-		return <IconButton tooltip={activeAction.tooltip}>{activeAction.icon}</IconButton>
+		return <IconButton tooltip={actions[action].tooltip}>{actions[action].icon}</IconButton>
 	}
 
 	render() {
 		return (
-				<IconMenu
-						iconButtonElement={this.getCurrentButton()}
-						openDirection="bottom-right">
-					{this.getCurrentMenuItems()}
-				</IconMenu>
+			<ToolbarGroup key={1} float="left">
+				<LeftNav ref="objectSelect" docked={false} menuItems={this.getComponentListItems()}
+					onChange={this.onComponentListSelect.bind(this)} />
+				<FlatButton label="Object"
+					onTouchTap={() => this.refs.objectSelect.toggle()}/>
+					<IconMenu
+							iconButtonElement={this.getComponentOptionButton()}
+							openDirection="bottom-right">
+						{this.getComponentOptionsList()}
+					</IconMenu>
+				<ObjectControls />
+			</ToolbarGroup>
 		)
 	}
 
 }
 
-export default ObjectMenu;
+export default ObjectSelectControl;

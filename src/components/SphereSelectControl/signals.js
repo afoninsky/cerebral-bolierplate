@@ -1,7 +1,7 @@
 import controller from '../../controller'
 
-controller.signal('sceneSelected', [
+controller.signal('sphereSelected', [
 	function (input, state, output) {
-		state.set('currentSphereId', input.id)
+		state.set('selectedSphereId', input)
 	}
 ]);

@@ -6,9 +6,8 @@ import ToolbarSeparator from 'material-ui/lib/toolbar/toolbar-separator'
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group'
 import ToolbarTitle from 'material-ui/lib/toolbar/toolbar-title'
 
-import ObjectMenu from '../ObjectMenu'
-import ObjectControls from '../ObjectControls'
 import SphereSelectControl from '../SphereSelectControl'
+import ObjectSelectControl from '../ObjectSelectControl'
 
 import RaisedButton from 'material-ui/lib/raised-button'
 import FlatButton from 'material-ui/lib/flat-button'
@@ -17,30 +16,12 @@ import LeftNav from 'material-ui/lib/left-nav'
 
 class HeaderToolbar extends React.Component {
 
-	onMenuItemClick(menuItem) {
-		switch (menuItem) {
-		case 'list-spheres':
-			this.refs.sphereSelect.toggle()
-			break;
-		case 'list-objects':
-			this.refs.objectSelect.toggle()
-			break;
-		default:
-			throw new Error('incorrect menu item: ' + menuItem)
-		}
-	}
 
 	render() {
 		return (
 			<Toolbar>
 				<SphereSelectControl />
-				<ToolbarGroup key={1} float="left">
-					<LeftNav ref="objectSelect" docked={false} openRight={true} menuItems={[]} />
-					<FlatButton label="Object"
-						onTouchTap={() => this.onMenuItemClick.bind(this)('list-objects')}/>
-					<ObjectMenu />
-					<ObjectControls />
-				</ToolbarGroup>
+				<ObjectSelectControl />
 				<ToolbarGroup key={2} float="right">
 					<ToolbarSeparator />
 					<RaisedButton label="Publish" primary={true} />

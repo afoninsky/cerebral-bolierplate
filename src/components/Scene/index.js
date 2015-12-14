@@ -7,8 +7,8 @@ import Scene from './src/scene'
 import Circle from './src/circleSprite'
 
 @cerebral({
-	spheresList: ['spheresList'],
-	currentSphereId: ['currentSphereId']
+	spheres: ['spheres'],
+	selectedSphereId: ['selectedSphereId']
 })
 
 class Canvas extends React.Component {
@@ -28,7 +28,7 @@ class Canvas extends React.Component {
   }
 
   currentSphereFromProps(props) {
-    return props.spheresList[props.currentSphereId]
+    return props.spheres[props.selectedSphereId]
   }
 
   render() {

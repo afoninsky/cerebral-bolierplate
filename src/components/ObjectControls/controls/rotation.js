@@ -5,7 +5,7 @@ import Slider from 'material-ui/lib/slider'
 import Toggle from 'material-ui/lib/toggle'
 
 @cerebral({
-	currentObject: ['currentObject']
+	selectedResource: ['selectedResource']
 })
 
 class ObjectMenu extends React.Component {

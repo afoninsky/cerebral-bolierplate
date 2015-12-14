@@ -10,48 +10,47 @@ import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group'
 import ToolbarSeparator from 'material-ui/lib/toolbar/toolbar-separator'
 
 @cerebral({
-	spheresList: ['spheresList'],
-	currentSphereId: ['currentSphereId']
+	spheres: ['spheres'],
+	selectedSphereId: ['selectedSphereId']
 })
 
 class SphereSelectControl extends React.Component {
 
 	static propTypes = {
-		spheresList: React.PropTypes.object,
-		currentSphereId: React.PropTypes.string
+		spheres: React.PropTypes.object,
+		selectedSphereId: React.PropTypes.string
 	}
 
 	getMenuItems() {
-		let list = [], selected = this.props.currentSphereId
-		_.each(this.props.spheresList, function (v, k) {
-			v = _.clone(v)
-			_.extend(v, {
+		let list = [], selected = this.props.selectedSphereId
+		_.each(this.props.spheres, function (v, k) {
+			list.push({
 				id: k,
-				disabled: k === selected
+				disabled: k === selected,
+				text: v.title
 			})
-			list.push(v)
 		})
 		return list
 	}
 
 	getButtonLabel() {
-		const selectedSphere = this.props.spheresList[this.props.currentSphereId] || {}
-		return selectedSphere.text || 'Select scene...'
+		const sphere = this.props.spheres[this.props.selectedSphereId] || {}
+		return sphere.title || 'Select scene...'
 	}
 
 	onMenuChange(e, key, payload) {
 		if(payload.disabled) { return }
-		this.props.signals.sceneSelected(payload);
+		this.props.signals.sphereSelected(payload.id);
 	}
 
 	render() {
 		return (
 			<ToolbarGroup key={0} float="left">
-				<LeftNav ref="leftNav" docked={false} menuItems={this.getMenuItems()}
+				<LeftNav ref="sphereSelect" docked={false} menuItems={this.getMenuItems()}
 					onChange={this.onMenuChange.bind(this)} />
 				<FlatButton secondary={true} labelPosition="after"
 					label={this.getButtonLabel.bind(this)()}
-					onTouchTap={() => this.refs.leftNav.toggle() }/>
+					onTouchTap={() => this.refs.sphereSelect.toggle() }/>
 				<ToolbarSeparator />
 			</ToolbarGroup>
 		)

@@ -10,7 +10,7 @@ const menuItems = [
 ]
 
 @cerebral({
-	currentObject: ['currentObject']
+	selectedResource: ['selectedResource']
 })
 
 class ObjectMenu extends React.Component {

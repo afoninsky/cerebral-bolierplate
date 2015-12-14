@@ -4,7 +4,7 @@ import { Decorator as cerebral } from 'cerebral-react'
 import Slider from 'material-ui/lib/slider'
 
 @cerebral({
-	currentObject: ['currentObject']
+	selectedResource: ['selectedResource']
 })
 
 class ObjectMenu extends React.Component {

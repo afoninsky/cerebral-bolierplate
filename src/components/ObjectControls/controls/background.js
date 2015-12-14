@@ -6,7 +6,7 @@ import ColorPicker from 'react-color'
 
 // http://casesandberg.github.io/react-color/#usage-install
 @cerebral({
-	currentObject: ['currentObject']
+	selectedResource: ['selectedResource']
 })
 
 class ObjectMenu extends React.Component {

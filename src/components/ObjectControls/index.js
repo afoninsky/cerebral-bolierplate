@@ -21,13 +21,19 @@ const controls = {
 }
 
 @cerebral({
-	currentObject: ['currentObject']
+	selectedSphereId: ['selectedSphereId'],
+	selectedResource: ['selectedResource']
 })
 
 class ObjectControls extends React.Component {
 
+	selectedAction() {
+		const selectedSphereId = this.props.selectedSphereId
+		return this.props.selectedResource[selectedSphereId].action
+	}
+
 	render() {
-		return controls[this.props.currentObject.selectedAction]
+		return controls[this.selectedAction()]
 	}
 
 }
