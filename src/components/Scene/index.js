@@ -8,31 +8,51 @@ import Circle from './src/circleSprite'
 
 @cerebral({
 	spheres: ['spheres'],
-	selected: ['selected']
+	selected: ['selected'],
+	sphereResources: ['sphereResources']
 })
 
 class Canvas extends React.Component {
 
   shouldComponentUpdate(props) {
-		const currentProps = this.currentSphereFromProps(this.props)
-		const newProps = this.currentSphereFromProps(props)
-		if(currentProps.src !== newProps.src) {
-    	this.scene.setBackground(newProps.src)
+		const current = this.currentSphereFromProps(this.props)
+		const next = this.currentSphereFromProps(props)
+		if(current.sphere.src !== next.sphere.src) {
+    	this.scene.setBackground(next.sphere.src)
 		}
     return false
   }
 
   componentDidMount() {
-		console.log(456)
-    const sphere = this.currentSphereFromProps(this.props)
-    this.scene = new Scene({
+    const {sphere, resources} = this.currentSphereFromProps(this.props)
+    const scene = this.scene = new Scene({
       container: this.refs.canvas,
       background: sphere.src
     })
+
+
+		resources.forEach(function (res) {
+			const obj = new Circle({
+				name: res.title,
+				camera: scene.camera,
+				settings: {
+					longitude: 0,
+					latitude: 0,
+					opacity: 1,
+					scale: 1,
+					ignoreAngles: true
+				}
+			})
+			scene.addObject(obj)
+		});
+
   }
 
   currentSphereFromProps(props) {
-    return props.spheres[props.selected.sphere]
+    return {
+			sphere: props.spheres[props.selected.sphere] || {},
+			resources: props.sphereResources[props.selected.sphere] || []
+		}
   }
 
   render() {
