@@ -33,12 +33,7 @@ class HeaderToolbar extends React.Component {
 	render() {
 		return (
 			<Toolbar>
-				<ToolbarGroup key={0} float="left">
-					<LeftNav ref="sphereSelect" docked={false} menuItems={[]} />
-					<FlatButton label="Sphere"
-						onTouchTap={() => this.onMenuItemClick.bind(this)('list-spheres')}/>
-					<ToolbarSeparator />
-				</ToolbarGroup>
+				<SphereSelectControl />
 				<ToolbarGroup key={1} float="left">
 					<LeftNav ref="objectSelect" docked={false} openRight={true} menuItems={[]} />
 					<FlatButton label="Object"
