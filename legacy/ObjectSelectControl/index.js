@@ -12,6 +12,8 @@ import LeftNav from 'material-ui/lib/left-nav'
 
 import ObjectControls from '../ObjectControls'
 
+import DropDownMenu from 'material-ui/lib/drop-down-menu'
+
 // style="position: relative; display: inline-block; height: 48px; font-size: 15px; outline: none; width: 192px;"
 
 // compas = explore
@@ -44,6 +46,7 @@ const actions = {
 }
 
 const defaultAction = _.keys(actions)[0]
+
 
 @cerebral({
 	spheres: ['spheres'],
@@ -102,22 +105,40 @@ class ObjectSelectControl extends React.Component {
 		return <IconButton tooltip={actions[action].tooltip}>{actions[action].icon}</IconButton>
 	}
 
+	getSphereComponentItems() {
+		return [
+		   { payload: '1', text: 'Never' },
+		   { payload: '2', text: 'Every Night' },
+		   { payload: '3', text: 'Weeknights' },
+		   { payload: '4', text: 'Weekends' },
+		   { payload: '5', text: 'Weekly' },
+		]
+	}
+
 	render() {
 		return (
 			<ToolbarGroup key={1} float="left">
-				<LeftNav ref="objectSelect" docked={false} menuItems={this.getComponentListItems()}
-					onChange={this.onComponentListSelect.bind(this)} />
-				<FlatButton label="Object"
-					onTouchTap={() => this.refs.objectSelect.toggle()}/>
-					<IconMenu
-							iconButtonElement={this.getComponentOptionButton()}
-							openDirection="bottom-right">
-						{this.getComponentOptionsList()}
-					</IconMenu>
-				<ObjectControls />
+				<DropDownMenu menuItems={this.getSphereComponentItems.bind(this)()} />
 			</ToolbarGroup>
 		)
 	}
+
+	// render() {
+	// 	return (
+	// 		<ToolbarGroup key={1} float="left">
+	// 			<LeftNav ref="objectSelect" docked={false} menuItems={this.getComponentListItems()}
+	// 				onChange={this.onComponentListSelect.bind(this)} />
+	// 			<FlatButton label="Object"
+	// 				onTouchTap={() => this.refs.objectSelect.toggle()}/>
+	// 				<IconMenu
+	// 						iconButtonElement={this.getComponentOptionButton()}
+	// 						openDirection="bottom-right">
+	// 					{this.getComponentOptionsList()}
+	// 				</IconMenu>
+	// 			<ObjectControls />
+	// 		</ToolbarGroup>
+	// 	)
+	// }
 
 }
 
