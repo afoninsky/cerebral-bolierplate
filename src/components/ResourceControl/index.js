@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Decorator as cerebral } from 'cerebral-react'
+
 import Paper from 'material-ui/lib/paper'
 import Tabs from 'material-ui/lib/tabs/tabs'
 import Tab from 'material-ui/lib/tabs/tab'
@@ -7,10 +9,17 @@ import Tab from 'material-ui/lib/tabs/tab'
 import Slider from 'material-ui/lib/slider'
 import Toggle from 'material-ui/lib/toggle'
 
+@cerebral({
+	selected: ['selected'],
+	// sphereResources: ['sphereResources']
+})
 
 class ResourceControl extends React.Component {
 
   render() {
+    if(this.props.selected.resource === null) {
+      return null
+    }
 		return (
        <Paper zDepth={4} rounded={false}
          style={{
@@ -41,10 +50,5 @@ class ResourceControl extends React.Component {
     )
   }
 }
-
-					// <Slider name="rotateZ" defaultValue={5} step={0.1} min={0} max={10} />
-					// <Toggle name="alwaysOnCamera" />
-					// <Slider name="rotateX" defaultValue={5} step={0.1} min={0} max={10} />
-					// <Slider name="rotateY" defaultValue={5} step={0.1} min={0} max={10} />
 
 export default ResourceControl;

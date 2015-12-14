@@ -8,18 +8,22 @@ import Circle from './src/circleSprite'
 
 @cerebral({
 	spheres: ['spheres'],
-	selectedSphereId: ['selectedSphereId']
+	selected: ['selected']
 })
 
 class Canvas extends React.Component {
 
   shouldComponentUpdate(props) {
-    const sphere = this.currentSphereFromProps(props)
-    this.scene.setBackground(sphere.src)
+		const currentProps = this.currentSphereFromProps(this.props)
+		const newProps = this.currentSphereFromProps(props)
+		if(currentProps.src !== newProps.src) {
+    	this.scene.setBackground(newProps.src)
+		}
     return false
   }
 
   componentDidMount() {
+		console.log(456)
     const sphere = this.currentSphereFromProps(this.props)
     this.scene = new Scene({
       container: this.refs.canvas,
@@ -28,7 +32,7 @@ class Canvas extends React.Component {
   }
 
   currentSphereFromProps(props) {
-    return props.spheres[props.selectedSphereId]
+    return props.spheres[props.selected.sphere]
   }
 
   render() {

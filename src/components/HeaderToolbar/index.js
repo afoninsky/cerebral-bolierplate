@@ -6,18 +6,19 @@ import ToolbarSeparator from 'material-ui/lib/toolbar/toolbar-separator'
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group'
 
 import SphereSelectControl from '../SphereSelectControl'
-import ObjectSelectControl from '../ObjectSelectControl'
+import ObjectSelectControl from '../ResourceSelectControl'
 
 import RaisedButton from 'material-ui/lib/raised-button'
 
 class HeaderToolbar extends React.Component {
 
-
 	render() {
 		return (
 			<Toolbar>
 				<SphereSelectControl />
-				<ObjectSelectControl />
+				<ToolbarGroup key={1} float="left">
+					<ObjectSelectControl />
+				</ToolbarGroup>
 				<ToolbarGroup key={2} float="right">
 					<ToolbarSeparator />
 					<RaisedButton label="Publish" primary={true} />

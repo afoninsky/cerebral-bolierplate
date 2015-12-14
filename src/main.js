@@ -8,7 +8,7 @@ import './main.css';
 
 window.THREE = require('three')
 
-require('./components/ObjectSelectControl/signals')
+require('./components/ResourceSelectControl/signals')
 require('./components/SphereSelectControl/signals')
 
 require('react-tap-event-plugin')()

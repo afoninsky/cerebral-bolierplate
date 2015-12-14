@@ -3,14 +3,15 @@ import Model from 'cerebral-baobab';
 
 // states model
 const model = Model({
-	selectedResource: {
-		first: {
-			index: 0,
-			action: 'settings'
-		}
+
+	// currently selected sphere and resource
+	selected: {
+		sphere: 'first',
+		resource: null
 	},
-	selectedSphereId: 'first',
-	spheres: { // all scenes in action
+
+	// list of spheres on scene
+	spheres: {
 		first: {
 			title: 'First Scene',
 			src: '/assets/scene1.jpg'
@@ -20,8 +21,11 @@ const model = Model({
 			src: '/assets/scene2.jpg'
 		}
 	},
-	sphereResources: { // resources in defined scenes
+
+	// list of resources assigned to scenes
+	sphereResources: {
 		first: [{
+			title: 'Simple Sprite',
 			type: 'sprite',
 			shape: 'circle',
 			color: '#000000',

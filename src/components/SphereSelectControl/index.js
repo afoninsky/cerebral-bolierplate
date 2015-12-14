@@ -11,22 +11,17 @@ import ToolbarSeparator from 'material-ui/lib/toolbar/toolbar-separator'
 
 @cerebral({
 	spheres: ['spheres'],
-	selectedSphereId: ['selectedSphereId']
+	selected: ['selected']
 })
 
 class SphereSelectControl extends React.Component {
 
-	static propTypes = {
-		spheres: React.PropTypes.object,
-		selectedSphereId: React.PropTypes.string
-	}
-
 	getMenuItems() {
-		let list = [], selected = this.props.selectedSphereId
+		let list = [], selectedSphere = this.props.selected.sphere
 		_.each(this.props.spheres, function (v, k) {
 			list.push({
 				id: k,
-				disabled: k === selected,
+				disabled: k === selectedSphere,
 				text: v.title
 			})
 		})
@@ -34,7 +29,7 @@ class SphereSelectControl extends React.Component {
 	}
 
 	getButtonLabel() {
-		const sphere = this.props.spheres[this.props.selectedSphereId] || {}
+		const sphere = this.props.spheres[this.props.selected.sphere] || {}
 		return sphere.title || 'Select scene...'
 	}
 
