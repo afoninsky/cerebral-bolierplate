@@ -151,6 +151,9 @@ Scene.prototype.onDocumentMouseDown = function (event) {
   var mesh = clickedMesh.object, index = mesh._index;
 
   if(typeof index === 'undefined') {
+    if(this.onClick) {
+      this.onClick()
+    }
     return;
   }
 

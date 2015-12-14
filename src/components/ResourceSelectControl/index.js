@@ -14,11 +14,12 @@ import DropDownMenu from 'material-ui/lib/drop-down-menu'
 class ResourceSelectControl extends React.Component {
 
 	getSphereComponentItems() {
-		const {sphere} = this.props.selected
+		const {sphere, resource} = this.props.selected
 		let items = (this.props.sphereResources[sphere] || []).map(function (v, k) {
 			return {
 				id: k,
-				text: v.title
+				text: v.title,
+				selected: true
 			}
 		})
 		items.unshift({
@@ -32,8 +33,11 @@ class ResourceSelectControl extends React.Component {
 	}
 
 	render() {
+		const selectedIndex = this.props.selected.resource === null ? 0 : this.props.selected.resource + 1
 		return (
-			<DropDownMenu menuItems={this.getSphereComponentItems.bind(this)()}
+			<DropDownMenu
+					selectedIndex={selectedIndex}
+					menuItems={this.getSphereComponentItems.bind(this)()}
 					onChange={this.onResourceSelected.bind(this)} />
 		)
 	}

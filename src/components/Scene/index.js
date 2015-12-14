@@ -20,33 +20,46 @@ class Canvas extends React.Component {
 		if(current.sphere.src !== next.sphere.src) {
     	this.scene.setBackground(next.sphere.src)
 		}
+		// obj.highlight(true, scene.scene)
     return false
   }
 
   componentDidMount() {
     const {sphere, resources} = this.currentSphereFromProps(this.props)
+
     const scene = this.scene = new Scene({
       container: this.refs.canvas,
       background: sphere.src
     })
 
+		const onResourceClick = this.onResourceClick.bind(this)
+		scene.onClick = function () {
+			onResourceClick(null)
+		}
 
-		resources.forEach(function (res) {
+		resources.forEach(function (res, k) {
+			let settings = _.pick(res, ['color', 'longitude', 'latitude', 'scale', 'angleZ', 'opacity', 'src'])
+			settings.ignoreAngles = true
+			settings.radius = 1
+			settings.shape = 'circle'
 			const obj = new Circle({
 				name: res.title,
 				camera: scene.camera,
-				settings: {
-					longitude: 0,
-					latitude: 0,
-					opacity: 1,
-					scale: 1,
-					ignoreAngles: true
-				}
+				settings: settings
 			})
+			obj.onClick = function () {
+				onResourceClick(k)
+			}
 			scene.addObject(obj)
 		});
 
   }
+
+	onResourceClick(resourceId) {
+		this.props.signals.resourceSelected({
+			id: resourceId
+		});
+	}
 
   currentSphereFromProps(props) {
     return {

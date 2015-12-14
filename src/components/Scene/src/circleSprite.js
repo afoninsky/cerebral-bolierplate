@@ -97,8 +97,3 @@ CircleSprite.prototype.load = function (newJson) {
     this.lookToCamera();
   }
 };
-
-
-CircleSprite.prototype.onClick = function () {
-  window.alert('Ты меня кликнул, как ты мог!!!');
-};

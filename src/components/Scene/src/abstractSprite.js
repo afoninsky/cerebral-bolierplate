@@ -88,3 +88,21 @@ AbstractSprite.prototype.onUnfocus = function () {
   console.log('unfocus not implemented');
 
 };
+
+
+AbstractSprite.prototype.highlight = function (setHihghlight, scene) {
+
+  let material = this.mesh.material
+  if(setHihghlight) {
+    this._opacity = this.opacity
+    material.opacity = 0.5
+  } else {
+    material.opacity = this._opacity
+  }
+  // var outlineMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000, side: THREE.BackSide })
+	// var outlineMesh = new THREE.Mesh(this.geometry, outlineMaterial)
+  // outlineMesh.position.copy(this.mesh.position)
+  // // outlineMesh.position.z = 2
+	// outlineMesh.scale.multiplyScalar(2)
+	// scene.add(outlineMesh)
+};

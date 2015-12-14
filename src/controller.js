@@ -26,12 +26,15 @@ const model = Model({
 	sphereResources: {
 		first: [{
 			title: 'Simple Sprite',
-			type: 'sprite',
-			shape: 'circle',
-			color: '#000000',
-			size: 1,
+			// type: 'sprite',
+			// shape: 'circle',
+			// color: '#FFFFFF',
 			scale: 1,
-			ignoreAngles: true
+			longitude: 0,
+			latitude: 0,
+			angleZ: 0,
+			opacity: 1,
+			src: '/assets/sprite.png'
 		}]
 	}
 });
