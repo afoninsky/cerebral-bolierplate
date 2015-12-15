@@ -2,7 +2,6 @@
 var _ = require('lodash');
 var AbstractSprite = require('./abstractSprite');
 
-
 var defaults = {
   type: 'sprite',
   color: '#FFFFFF',
@@ -39,7 +38,7 @@ var CircleSprite = module.exports = function (cfg) {
   this.mesh = new THREE.Mesh(this.geometry, this.material);
   this.mesh.name = this.name;
 
-  this.setCoords(json.longitude, json.latitude);
+  this.setPosition(json.longitude, json.latitude, json.depth);
   this.opacity(json.opacity);
   this.scale(json.scale);
 
@@ -74,7 +73,7 @@ CircleSprite.prototype.load = function (newJson) {
   }
 
   if(this.compare(newJson, ['longitude', 'latitude'])) {
-    this.setCoords(json.longitude, json.latitude);
+    this.setPosition(json.longitude, json.latitude);
   }
 
   if(this.compare(newJson, ['scale'])) {

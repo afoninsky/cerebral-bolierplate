@@ -1,11 +1,13 @@
 'use strict';
 var common = require('./common');
 var _ = require('lodash');
+var EventEmitter = require('event-emitter')
 
 var AbstractSprite = module.exports = function (cfg) {
 
   this.name = cfg.name;
-  this.camera = cfg.camera;
+  this.scene = cfg.scene
+  this.event = new EventEmitter()
 };
 
 AbstractSprite.prototype.compare = function (newObj, values) {
@@ -33,48 +35,41 @@ AbstractSprite.prototype.scale = function (size) {
 
   this.mesh.scale.set(size, size, size);
   this.json.scale = size;
+  this.event.emit('scale', size)
 };
 
 AbstractSprite.prototype.opacity = function (value) {
 
   this.mesh.material.opacity = value;
   this.json.opacity = value;
+  this.event.emit('opacity', value)
 };
 
 AbstractSprite.prototype.rotate = function (axis, angle) {
-
   var value = THREE.Math.mapLinear(angle, -45, 45, 1.58, -1.58);
   this.mesh.rotation[axis] = value;
   var field = angle + axis.toUpperCase();
   this.json[field] = axis;
+  this.event.emit('rotate', axis, angle)
 };
 
 
-AbstractSprite.prototype.setCoords = function (lon, lat) {
+AbstractSprite.prototype.setPosition = function (lon, lat, depth) {
 
   common.applyPosition(
-    common.sphereToDecart(lon, lat, common.const.OBJECTS_LAYER),
+    common.sphereToDecart(lon, lat, depth || common.const.OBJECTS_LAYER),
     this.mesh.position
   );
   this.json.longitude = lon;
   this.json.latitude = lat;
+  this.event.emit('position', lon, lat, depth)
 };
 
 AbstractSprite.prototype.lookToCamera = function () {
 
-  this.mesh.quaternion.copy(this.camera.quaternion);
-};
-
-AbstractSprite.prototype.onLoad = function () {
-
-  console.log('load not implemented');
-
-};
-
-AbstractSprite.prototype.onClick = function () {
-
-  console.log('click not implemented');
-
+  var camera = this.scene.camera
+  this.mesh.quaternion.copy(camera.quaternion);
+  this.event.emit('cameralook')
 };
 
 AbstractSprite.prototype.onFocus = function () {
@@ -89,20 +84,7 @@ AbstractSprite.prototype.onUnfocus = function () {
 
 };
 
-
-AbstractSprite.prototype.highlight = function (setHihghlight, scene) {
-
-  let material = this.mesh.material
-  if(setHihghlight) {
-    this._opacity = this.opacity
-    material.opacity = 0.5
-  } else {
-    material.opacity = this._opacity
-  }
-  // var outlineMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000, side: THREE.BackSide })
-	// var outlineMesh = new THREE.Mesh(this.geometry, outlineMaterial)
-  // outlineMesh.position.copy(this.mesh.position)
-  // // outlineMesh.position.z = 2
-	// outlineMesh.scale.multiplyScalar(2)
-	// scene.add(outlineMesh)
-};
+AbstractSprite.prototype.delete = function () {
+  this.scene.removeObject(this)
+  this.event.emit('destroy');
+}

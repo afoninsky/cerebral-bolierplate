@@ -38,8 +38,6 @@ class ResourceControl extends React.Component {
              <Slider name="latutude" defaultValue={5} step={0.1} min={0} max={10} />
              <p>Size:</p>
              <Slider name="size" defaultValue={5} step={0.1} min={0} max={10} />
-             <p>Rotation:</p>
-             <Slider name="rotation" defaultValue={5} step={0.1} min={0} max={10} />
              <p>Opacity:</p>
              <Slider name="opacity" defaultValue={5} step={0.1} min={0} max={10} />
            </Tab>

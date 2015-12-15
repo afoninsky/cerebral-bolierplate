@@ -1,9 +1,11 @@
 var common = require('./common');
+var EventEmitter = require('event-emitter')
 
 var Scene = module.exports = function (cfg) {
 
   this.scene = new THREE.Scene();
   this.objects = [];
+  this.event = new EventEmitter()
 
   var camera = this.camera = new THREE.PerspectiveCamera(
     common.const.SCENE_FOV,
@@ -77,17 +79,12 @@ Scene.prototype.addObject = function (obj) {
   mesh._index = this.objects.push(obj) - 1;
   this.selectedObject = obj;
   this.scene.add(mesh);
-  obj.onLoad();
+  obj.event.emit('ready');
 };
 
 Scene.prototype.removeObject = function (obj) {
-  // var object = scene.getObjectByName( "objectName" );
-  // or to recursively search the scene graph
-  //
-  // var object = scene.getObjectByName( "objectName", true );
-  // Alternatively, you can search by ID.
-  //
-  // var object = scene.getObjectById( 4, true );
+  var mesh = this.scene.getObjectByName(obj.name)
+  this.scene.remove(mesh)
 };
 
 Scene.prototype.lookAt = function (lon, lat) {
@@ -151,14 +148,11 @@ Scene.prototype.onDocumentMouseDown = function (event) {
   var mesh = clickedMesh.object, index = mesh._index;
 
   if(typeof index === 'undefined') {
-    if(this.onClick) {
-      this.onClick()
-    }
-    return;
+    return this.event.emit('click', event)
   }
 
   var clickedObject = this.objects[index];
-  clickedObject.onClick();
+  return clickedObject.event.emit('click', event)
 };
 
 Scene.prototype.onDocumentMouseUp = function () {
