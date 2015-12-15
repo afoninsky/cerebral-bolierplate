@@ -7,7 +7,8 @@ const model = Model({
 	// currently selected sphere and resource
 	selected: {
 		sphere: 'first',
-		resource: null
+		resource: null,
+		settings: {}
 	},
 
 	// list of spheres on scene
@@ -32,7 +33,7 @@ const model = Model({
 			scale: 1,
 			longitude: 0,
 			latitude: 0,
-			angleZ: 0,
+			// angleZ: 0,
 			opacity: 1,
 			src: '/assets/sprite.png'
 		}]

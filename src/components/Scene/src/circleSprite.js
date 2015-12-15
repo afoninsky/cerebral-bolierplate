@@ -38,7 +38,7 @@ var CircleSprite = module.exports = function (cfg) {
   this.mesh = new THREE.Mesh(this.geometry, this.material);
   this.mesh.name = this.name;
 
-  this.setPosition(json.longitude, json.latitude, json.depth);
+  this.position(json.longitude, json.latitude, json.depth);
   this.opacity(json.opacity);
   this.scale(json.scale);
 
@@ -73,7 +73,7 @@ CircleSprite.prototype.load = function (newJson) {
   }
 
   if(this.compare(newJson, ['longitude', 'latitude'])) {
-    this.setPosition(json.longitude, json.latitude);
+    this.position(json.longitude, json.latitude);
   }
 
   if(this.compare(newJson, ['scale'])) {

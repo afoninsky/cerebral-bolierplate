@@ -10,16 +10,26 @@ import Slider from 'material-ui/lib/slider'
 import Toggle from 'material-ui/lib/toggle'
 
 @cerebral({
-	selected: ['selected'],
-	// sphereResources: ['sphereResources']
+	selected: ['selected']
 })
 
 class ResourceControl extends React.Component {
 
+	onPropertyChange(property, value) {
+		this.props.signals.resourcePropertyChanged({
+			key: property,
+			value: value
+		})
+	}
+
   render() {
-    if(this.props.selected.resource === null) {
+
+		if(this.props.selected.resource === null) {
       return null
     }
+
+		const settings = this.props.selected.settings
+
 		return (
        <Paper zDepth={4} rounded={false}
          style={{
@@ -33,13 +43,17 @@ class ResourceControl extends React.Component {
          <Tabs>
            <Tab label="Settings">
              <p>Longitude:</p>
-             <Slider name="longituide" defaultValue={5} step={0.1} min={0} max={10} />
+             <Slider name="longituide" defaultValue={settings.longitude} step={1} min={0} max={360}
+							 onChange={ (event, value) => this.onPropertyChange('longitude', value) } />
              <p>Latituide:</p>
-             <Slider name="latutude" defaultValue={5} step={0.1} min={0} max={10} />
-             <p>Size:</p>
-             <Slider name="size" defaultValue={5} step={0.1} min={0} max={10} />
+             <Slider name="latutude" defaultValue={settings.longitude} step={1} min={-85} max={85}
+							 onChange={ (event, value) => this.onPropertyChange('latitude', value) } />
+						 <p>Scale:</p>
+             <Slider name="scale" defaultValue={settings.scale} step={0.1} min={0.1} max={5}
+							 onChange={ (event, value) => this.onPropertyChange('scale', value) } />
              <p>Opacity:</p>
-             <Slider name="opacity" defaultValue={5} step={0.1} min={0} max={10} />
+             <Slider name="opacity" defaultValue={settings.opacity} step={0.1} min={0} max={1}
+							 onChange={ (event, value) => this.onPropertyChange('opacity', value) } />
            </Tab>
            <Tab label="onClick"></Tab>
            <Tab label="onHover"></Tab>

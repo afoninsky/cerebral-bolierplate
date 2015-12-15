@@ -1,3 +1,15 @@
+/* events:
+
+rotate
+position
+cameralook
+opacity
+scale
+ready
+destroy
+click
+ */
+
 'use strict';
 var common = require('./common');
 var _ = require('lodash');
@@ -54,7 +66,7 @@ AbstractSprite.prototype.rotate = function (axis, angle) {
 };
 
 
-AbstractSprite.prototype.setPosition = function (lon, lat, depth) {
+AbstractSprite.prototype.position = function (lon, lat, depth) {
 
   common.applyPosition(
     common.sphereToDecart(lon, lat, depth || common.const.OBJECTS_LAYER),

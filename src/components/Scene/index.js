@@ -29,6 +29,12 @@ class Canvas extends React.Component {
 			this.createHighlightObject(next.selected.resource)
 		}
 
+		// update selected resource property if something changed
+		let selectedResource = this.resources[next.selected.resource]
+		if(selectedResource) {
+			selectedResource.load(next.selected.settings)
+		}
+
     return false
   }
 
@@ -79,7 +85,7 @@ class Canvas extends React.Component {
 		settings.src = null
 		settings.opacity = 0.3
 		settings.scale *= 1.1
-		settings.depth = common.const.OBJECTS_LAYER + 0.00001
+		settings.depth = common.const.OBJECTS_LAYER - 0.00001
 		let obj = this.highlight = new Circle({
 			name: 'highlight',
 			scene: this.scene,

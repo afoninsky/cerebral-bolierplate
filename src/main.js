@@ -10,6 +10,7 @@ window.THREE = require('three')
 
 require('./components/ResourceSelectControl/signals')
 require('./components/SphereSelectControl/signals')
+require('./components/ResourceControl/signals')
 
 require('react-tap-event-plugin')()
 
